@@ -1,0 +1,134 @@
+{% extends 'blog_website/base.html' %}
+{% load static %}
+
+{% block title %} Blog page {% endblock %}
+
+{% block content %}
+    <div class="container-fluid home-slider">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="background-color: #343a40!important">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>Post tilte number 1</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+<!--   POST CONTENT   -->
+
+            <div class="col-lg-8">
+
+<!--   BREAD CRUMBS   -->
+
+                <nav aria-label="breadcrumb" class="mt-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Main page</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Post number 1<a href="#">Main page</a></li>
+                    </ol>
+                </nav>
+
+<!--   BODY OF POST   -->
+
+                <img class="img-fluid rounded" src="{% static 'img/img1.jpg' %}" alt="image">
+                <hr>
+                <p class="lead">Main paragraph. Main paragraph. Main paragraph. Main paragraph. Main paragraph. Main paragraph. Main paragraph. Main paragraph. Main paragraph. </p>
+                <hr>
+                <p class="lead text-right">Author: <a href="#">John Doe</a></p>
+                <hr>
+                <div class="text-right">Date of publicate 22.02.2022</div>
+
+<!--   COMMENTS COMPONENT   -->
+
+                <div class="card my-4">
+                    <h5 class="card-header">Comment: </h5>
+                    <div class="card-body">
+                        <from>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </from>
+                    </div>
+                </div>
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="https://place-hold.it/50x50" alt="image">
+                    <div class="media-body">
+                        <h5 class="mt-0">John Lenon</h5>
+                        My important opinion about this post. My important opinion about this post. My important opinion about this post. My important opinion about this post.
+                    </div>
+                </div>
+            </div>
+
+<!--   RIGHT COLUMN   -->
+
+            <div class="col-md-4">
+                <div class="card my-4">
+                    <h5 class="card-header">Tags</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">Django</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">VueJS</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">DRF</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">JavaScript</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">CSS</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">NuxtJS</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card my-4">
+                    <h5 class="card-header">Latest posts</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Post 1</h5>
+                        <p class="card-text">Text about something / Text about something / Text about something / Text about something / Text about something / Text about something / </p>
+                        <a href="#" class="card-link">Read</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Post 2</h5>
+                        <p class="card-text">Text about something / Text about something / Text about something / Text about something / Text about something / Text about something / </p>
+                        <a href="#" class="card-link">Read</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Post 3</h5>
+                        <p class="card-text">Text about something / Text about something / Text about something / Text about something / Text about something / Text about something / </p>
+                        <a href="#" class="card-link">Read</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Post 4</h5>
+                        <p class="card-text">Text about something / Text about something / Text about something / Text about something / Text about something / Text about something / </p>
+                        <a href="#" class="card-link">Read</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Post 5</h5>
+                        <p class="card-text">Text about something / Text about something / Text about something / Text about something / Text about something / Text about something / </p>
+                        <a href="#" class="card-link">Read</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
