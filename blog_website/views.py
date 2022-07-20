@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.core.paginator import Paginator
 
 from .models import Post
 
@@ -7,7 +8,12 @@ from .models import Post
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all()
-        return render(request, "blog_website/index.html", {"posts": posts})
+        paginator = Paginator(posts, 3)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, "blog_website/index.html", {"page_obj": page_obj})
 
 
 class AboutView(View):
