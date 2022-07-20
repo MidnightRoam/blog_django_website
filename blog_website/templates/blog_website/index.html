@@ -11,96 +11,23 @@
       <div class="container">
         <h1 class="my-3">Latest added posts</h1>
         <div class="row">
+          {% for post in posts %}
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <img src="{% static '/img/img1.jpg' %}" alt="image" class="card-img-top">
+              <img src="{{ post.image.url }}" alt="image" class="card-img-top">
               <div class="card-body">
-                <h2 class="card-title">Title</h2>
-                <p class="card-text">This is a short description of the post</p>
+                <h2 class="card-title">{{ post.h1 }}</h2>
+                <p class="card-text">{{ post.short_description|safe|truncatechars:100 }}</p>
                 <div class="d-flix justify-content-between align-items-center">
                   <div class="btn-group">
                     <a href="{% url 'blog_page' %}" class="btn btn-sm btn-outline-secondary">Detail</a>
                   </div>
-                  <small class="text-muted">11.04.2022</small>
+                  <small class="text-muted">{{ post.created_at }}</small>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src="{% static 'img/img2.jpg' %}" alt="image" class="card-img-top">
-              <div class="card-body">
-                <h2 class="card-title">Title</h2>
-                <p class="card-text">This is a short description of the post</p>
-                <div class="d-flix justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="{% url 'blog_page' %}" class="btn btn-sm btn-outline-secondary">Detail</a>
-                  </div>
-                  <small class="text-muted">22.04.2021</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src="{% static 'img/img3.jpg' %}" alt="image" class="card-img-top">
-              <div class="card-body">
-                <h2 class="card-title">Title</h2>
-                <p class="card-text">This is a short description of the post</p>
-                <div class="d-flix justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="{% url 'blog_page' %}" class="btn btn-sm btn-outline-secondary">Detail</a>
-                  </div>
-                  <small class="text-muted">11.04.2021</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src="{% static 'img/img3.jpg' %}" alt="image" class="card-img-top">
-              <div class="card-body">
-                <h2 class="card-title">Title</h2>
-                <p class="card-text">This is a short description of the post</p>
-                <div class="d-flix justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="{% url 'blog_page' %}" class="btn btn-sm btn-outline-secondary">Detail</a>
-                  </div>
-                  <small class="text-muted">11.04.2022</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src="{% static 'img/img2.jpg' %}" alt="image" class="card-img-top">
-              <div class="card-body">
-                <h2 class="card-title">Title</h2>
-                <p class="card-text">This is a short description of the post</p>
-                <div class="d-flix justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="{% url 'blog_page' %}" class="btn btn-sm btn-outline-secondary">Detail</a>
-                  </div>
-                  <small class="text-muted">11.04.2022</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src="{% static 'img/img1.jpg' %}" alt="image" class="card-img-top">
-              <div class="card-body">
-                <h2 class="card-title">Title</h2>
-                <p class="card-text">This is a short description of the post</p>
-                <div class="d-flix justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="{% url 'blog_page' %}" class="btn btn-sm btn-outline-secondary">Detail</a>
-                  </div>
-                  <small class="text-muted">11.04.2022</small>
-                </div>
-              </div>
-            </div>
-          </div>
+          {% endfor %}}
         </div>
       </div>
 {% endblock %}
