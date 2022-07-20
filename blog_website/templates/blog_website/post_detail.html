@@ -1,0 +1,37 @@
+{% extends 'blog_website/base.html' %}
+{% load static %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block header %}
+    {% include './block/header.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+<!--   POST CONTENT   -->
+            <div class="col-lg-8">
+<!--   BREAD CRUMBS   -->
+                <nav aria-label="breadcrumb" class="mt-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Main page</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ post.h1 }}</li>
+                    </ol>
+                </nav>
+<!--   BODY OF POST   -->
+                <img class="img-fluid rounded" src="{{ post.image.url }}" alt="image">
+                <hr>
+                <p class="lead">{{ post.content|safe }}</p>
+                <hr>
+                <p class="lead text-right">Author: <a href="#">{{ post.author }}</a></p>
+                <hr>
+                <div class="text-right">Date of publication: {{ post.created_at }}</div>
+<!--   COMMENTS COMPONENT   -->
+                {% include './block/comments.html' %}
+            </div>
+<!--   RIGHT COLUMN   -->
+            {% include './block/aside.html' %}
+        </div>
+    </div>
+{% endblock %}
