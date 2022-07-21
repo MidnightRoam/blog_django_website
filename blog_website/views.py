@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.core.paginator import Paginator
-from .forms import RegisterForm
-from django.contrib.auth import login
+from .forms import RegisterForm, LoginForm
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 
 from .models import Post
@@ -53,3 +53,20 @@ class RegisterView(View):
                 login(request, user)
                 return HttpResponseRedirect('/')
         return render(request, 'blog_website/signup.html', {'form': form})
+
+
+class LoginView(View):
+    def get(self, request, *args, **kwargs):
+        form = LoginForm()
+        return render(request, "blog_website/signin.html", {"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+        return render(request, "blog_website/signin.html", {"form": form})
