@@ -1,4 +1,5 @@
 from django.core.mail import send_mail, BadHeaderError
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.core.paginator import Paginator
@@ -93,3 +94,20 @@ class FeedBackView(View):
 class SuccessView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'blog_website/thanks.html', {'title': 'Thanks'})
+
+
+class SearchResultsView(View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('q')
+        results = ""
+        if query:
+            results = Post.objects.filter(
+                Q(h1__icontains=query) | Q(content__icontains=query)
+            )
+        paginator = Paginator(results, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'blog_website/search.html', {'title': 'Search',
+                                                            'results': page_obj,
+                                                            'count': paginator.count
+                                                            })
