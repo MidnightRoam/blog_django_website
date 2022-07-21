@@ -1,6 +1,8 @@
 {% extends 'blog_website/base.html' %}
+{% load static %}
 
-{% block title %} Contact page {% endblock %}
+{% block title %} Feed back {% endblock %}
+
 
 {% block content %}
 <div class="container-fluid home-slider">
@@ -21,27 +23,41 @@
         <!--   BREAD CRUMBS   -->
         <nav aria-label="breadcrumbs" class="mt-4">
           <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Contacts</li>
           </ol>
         </nav>
 
         <p class="lead">If you want to contact me, please fill out this feedback form</p>
-
+        Hello, {{ user }}
         <!--   FEEDBACK FORM   -->
-
-        <form name="contact-form" action="{% url 'thanks_page' %}">
+        {% if form.errors %}
+          {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+          {% endfor %}
+          {% for error in field.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+          {% endfor %}
+        {% endif %}
+        <form name="contact-form" method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
           <div class="row">
             <div class="col-md-6">
               <div class="md-form mb-0">
                 <label for="name" class="sr-only">Your name</label>
-                <input type="text" id="name" class="form-control" placeholder="Your name">
+                {{ form.name }}
               </div>
             </div>
             <div class="col-md-6">
               <div class="md-form mb-0">
                 <label for="email" class="sr-only">Your email</label>
-                <input type="text" id="email" class="form-control" placeholder="Your email">
+                {{ form.email }}
               </div>
             </div>
           </div>
@@ -50,7 +66,7 @@
             <div class="col-md-12">
               <div class="md-form mb-0">
                 <label for="subject" class="sr-only">Subject</label>
-                <input type="text" id="subject" class="form-control" placeholder="Subject">
+                {{ form.subject }}
               </div>
             </div>
           </div>
@@ -59,13 +75,13 @@
             <div class="col-md-12">
               <div class="md-form">
                 <label for="message" class="sr-only">Message</label>
-                <textarea type="text" id="message" class="form-control md-textarea" placeholder="Message"></textarea>
+                {{ form.message }}
               </div>
             </div>
           </div>
-        <div class="text-center text-md-left mt-3">
-          <button class="btn btn-primary" type="submit">Send</button>
-        </div>
+            <div class="text-center text-md-left mt-3">
+              <button class="btn btn-primary" type="submit">Send</button>
+            </div>
         </form>
       </div>
     </div>
