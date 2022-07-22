@@ -5,6 +5,7 @@ from django.views import View
 from django.core.paginator import Paginator
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect, HttpResponse
+from taggit.models import Tag
 
 from .models import Post
 from .forms import RegisterForm, LoginForm, FeedBackForm
@@ -29,7 +30,11 @@ class AboutView(View):
 class PostDetailView(View):
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, url=slug)
-        return render(request, "blog_website/post_detail.html", {"post": post})
+        common_tags = Post.tag.most_common()
+        last_posts = Post.objects.all().order_by('-id')[:5]
+        return render(request, "blog_website/post_detail.html", {"post": post,
+                                                                 "common_tags": common_tags,
+                                                                 "last_posts": last_posts})
 
 
 class ThanksView(View):
@@ -111,3 +116,15 @@ class SearchResultsView(View):
                                                             'results': page_obj,
                                                             'count': paginator.count
                                                             })
+
+
+class TagView(View):
+    def get(self, request, slug, *args, **kwargs):
+        tag = get_object_or_404(Tag, slug=slug)
+        posts = Post.objects.filter(tag=tag)
+        common_tags = Post.tag.most_common()
+        return render(request, 'blog_website/tag.html', {"posts": posts,
+                                                        "title": f'#{tag}',
+                                                        "common_tags": common_tags
+                                                        })
+

@@ -23,6 +23,11 @@
                 <img class="img-fluid rounded" src="{{ post.image.url }}" alt="image">
                 <hr>
                 <p class="lead">{{ post.content|safe }}</p>
+                <div class="d-flex justify-content-end">
+                    {% for tag in post.tag.all %}
+                        <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                    {% endfor %}
+                </div>
                 <hr>
                 <p class="lead text-right">Author: <a href="#">{{ post.author }}</a></p>
                 <hr>

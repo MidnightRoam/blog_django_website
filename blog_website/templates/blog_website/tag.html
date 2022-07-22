@@ -1,17 +1,21 @@
 {% extends 'blog_website/base.html' %}
 {% load static %}
 
-{% block title %} Home page {% endblock %}
+{% block title %}Search{% endblock %}
 
 {% block header %}
-  {% include 'blog_website/block/slider.html' %}
+  {% include 'blog_website/block/header.html' %}
 {% endblock %}
 
 {% block content %}
       <div class="container">
-        <h1 class="my-3">Latest added posts</h1>
+        <p class="my-3">Other tags:
+            {% for mt in common_tags %}
+                <a href="{% url 'tag' mt.slug %}" class="badge badge-success">#{{ mt }}</a>
+            {% endfor %}
+        </p>
         <div class="row">
-          {% for post in page_obj %}
+          {% for post in posts %}
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
               <img src="{{ post.image.url }}" alt="image" class="card-img-top">
@@ -19,7 +23,7 @@
                 <h2 class="card-title">{{ post.h1 }}</h2>
                 <p class="card-text">{{ post.short_description|safe|truncatechars:100 }}</p>
                 {% for tag in post.tag.all %}
-                  <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                  <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
                 {% endfor %}
                 <div class="d-flix justify-content-between align-items-center">
                   <div class="btn-group">
