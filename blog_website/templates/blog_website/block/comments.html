@@ -1,18 +1,25 @@
 <div class="card my-4">
     <h5 class="card-header">Comment: </h5>
+    {% if user.is_authenticated %}
     <div class="card-body">
-        <from>
+        <form method="post">
+            {% csrf_token %}
             <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                {{ comment_form.text }}
             </div>
             <button type="submit" class="btn btn-primary">Send</button>
-        </from>
+        </form>
     </div>
+    {% else %}
+    <h6 class="card-header"><a href="{% url 'signin' %}">Sign In</a> or <a href="{% url 'signup' %}">Sign Up </a> in order to leave comment</h6>
+    {% endif %}
 </div>
+{% for comment in post.comments.all %}
 <div class="media mb-4">
     <img class="d-flex mr-3 rounded-circle" src="https://place-hold.it/50x50" alt="image">
     <div class="media-body">
-        <h5 class="mt-0">John Lenon</h5>
-        My important opinion about this post. My important opinion about this post. My important opinion about this post. My important opinion about this post.
+        <h5 class="mt-0">{{ comment.username }}</h5>
+        {{ comment.text }}
     </div>
 </div>
+{% endfor %}
